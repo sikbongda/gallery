@@ -10,7 +10,7 @@ class PhotoApiServiceImpl(private val client: HttpClient) : PhotoApiService {
     override suspend fun getListImages(): List<Photo> {
         return try {
             client.get {
-                url(BASE_URL)
+                url(LIST_IMAGES_URL)
             }
         } catch (e: RedirectResponseException) {
             // 3xx - responses

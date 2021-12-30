@@ -1,26 +1,22 @@
 package com.wally.gallery
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.wally.network.PhotoApiService
+import androidx.paging.PagingData
+import com.wally.gallery.domain.GetPhotosUseCase
+import com.wally.network.response.Photo
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class PhotoViewModel : ViewModel() {
+@HiltViewModel
+class PhotoViewModel @Inject constructor(
+    private val getPhotosUseCase: GetPhotosUseCase
+) : ViewModel() {
     private val _photoUiState: MutableStateFlow<PhotoUiState> =
         MutableStateFlow(PhotoUiState.Initial)
     val photoUiState: StateFlow<PhotoUiState> = _photoUiState
 
-    fun getListImages() {
-        viewModelScope.launch {
-            runCatching {
-                PhotoApiService.create().getListImages()
-            }.onSuccess {
-                _photoUiState.value = PhotoUiState.Success(it)
-            }.onFailure {
-                _photoUiState.value = PhotoUiState.Error(it.message.toString())
-            }
-        }
-    }
+    val photoFlow: Flow<PagingData<Photo>> = getPhotosUseCase()
 }

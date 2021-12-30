@@ -7,10 +7,12 @@ import io.ktor.client.features.*
 import io.ktor.client.request.*
 
 class PhotoApiServiceImpl(private val client: HttpClient) : PhotoApiService {
-    override suspend fun getListImages(): List<Photo> {
+    override suspend fun getListImages(page: Int, limit: Int): List<Photo> {
         return try {
             client.get {
                 url(LIST_IMAGES_URL)
+                parameter(PAGE, page)
+                parameter(LIMIT, limit)
             }
         } catch (e: RedirectResponseException) {
             // 3xx - responses

@@ -9,7 +9,7 @@ import io.ktor.client.features.json.*
 import io.ktor.client.features.logging.*
 
 interface PhotoApiService {
-    suspend fun getListImages(): List<Photo>
+    suspend fun getListImages(page: Int, limit: Int): List<Photo>
 
     companion object {
         private const val TAG = "PhotoApiService"

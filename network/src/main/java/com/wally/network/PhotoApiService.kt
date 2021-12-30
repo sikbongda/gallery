@@ -26,9 +26,9 @@ interface PhotoApiService {
                         }
                     }
                     install(HttpTimeout) {
-                        requestTimeoutMillis = 15000L
-                        connectTimeoutMillis = 15000L
-                        socketTimeoutMillis = 15000L
+                        requestTimeoutMillis = TIME_OUT
+                        connectTimeoutMillis = TIME_OUT
+                        socketTimeoutMillis = TIME_OUT
                     }
                     install(JsonFeature) {
                         serializer = GsonSerializer {

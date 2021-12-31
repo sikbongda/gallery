@@ -1,4 +1,4 @@
-package com.wally.gallery
+package com.wally.gallery.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.paging.PagingData

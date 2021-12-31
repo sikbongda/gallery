@@ -6,7 +6,6 @@ import androidx.paging.PagingData
 import com.wally.network.PhotoApiService
 import com.wally.network.response.Photo
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class PhotoRepositoryImpl @Inject constructor(

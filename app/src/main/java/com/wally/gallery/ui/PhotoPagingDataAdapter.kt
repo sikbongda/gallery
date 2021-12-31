@@ -1,4 +1,4 @@
-package com.wally.gallery
+package com.wally.gallery.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

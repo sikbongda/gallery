@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.wally.gallery.databinding.FragmentPhotoListBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,7 +17,12 @@ import kotlinx.coroutines.flow.collectLatest
 class PhotoListFragment : Fragment() {
     private lateinit var binding: FragmentPhotoListBinding
     private val photoViewModel: PhotoViewModel by viewModels()
-    private val adapter: PhotoPagingDataAdapter by lazy { PhotoPagingDataAdapter() }
+    private val adapter: PhotoPagingDataAdapter by lazy {
+        PhotoPagingDataAdapter { photo ->
+            val directions = PhotoListFragmentDirections.actionPhotoDetails(photo.id)
+            findNavController().navigate(directions)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

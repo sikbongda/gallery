@@ -5,6 +5,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.wally.gallery.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -24,7 +25,8 @@ class MainActivity : AppCompatActivity() {
 
         lifecycleScope.launchWhenStarted {
             viewModel.photoFlow.collectLatest { photoUiState ->
-                binding.rvPhoto.layoutManager = GridLayoutManager(this@MainActivity, 2)
+                //binding.rvPhoto.layoutManager = GridLayoutManager(this@MainActivity, 2)
+                binding.rvPhoto.layoutManager = LinearLayoutManager(this@MainActivity)
                 adapter.submitData(photoUiState)
             }
         }

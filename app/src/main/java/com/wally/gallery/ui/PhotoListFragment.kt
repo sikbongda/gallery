@@ -31,16 +31,12 @@ class PhotoListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setAdapter()
         initRecyclerView()
         collectFlow()
     }
 
-    private fun setAdapter() {
-        binding.rvPhoto.adapter = adapter
-    }
-
     private fun initRecyclerView() {
+        binding.rvPhoto.adapter = adapter
         binding.rvPhoto.setHasFixedSize(true)
         binding.rvPhoto.layoutManager = LinearLayoutManager(requireContext())
     }

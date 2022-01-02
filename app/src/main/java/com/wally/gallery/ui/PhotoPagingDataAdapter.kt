@@ -2,7 +2,6 @@ package com.wally.gallery.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.view.ViewCompat
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -24,7 +23,6 @@ class PhotoPagingDataAdapter(
         }
 
         fun bind(photo: Photo?) {
-            ViewCompat.setTransitionName(binding.imagePhoto, "image_${photo?.id}")
             with(binding) {
                 item = photo
                 executePendingBindings()

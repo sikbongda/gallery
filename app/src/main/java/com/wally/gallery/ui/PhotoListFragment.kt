@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.wally.gallery.databinding.FragmentPhotoListBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,8 +21,13 @@ class PhotoListFragment : Fragment() {
     private val photoViewModel: PhotoViewModel by viewModels()
     private val adapter: PhotoPagingDataAdapter by lazy {
         PhotoPagingDataAdapter { photo ->
+            // click listener
             val directions = PhotoListFragmentDirections.actionPhotoDetails(photo.id)
             findNavController().navigate(directions)
+        }.apply {
+            addLoadStateListener { loadStates ->
+                binding.progressBar.isVisible = loadStates.refresh is LoadState.Loading
+            }
         }
     }
 
@@ -48,7 +55,7 @@ class PhotoListFragment : Fragment() {
     }
 
     private fun collectFlow() {
-        lifecycleScope.launchWhenStarted {
+        lifecycleScope.launchWhenCreated {
             photoViewModel.photoFlow.collectLatest { pagedData ->
                 adapter.submitData(pagedData)
             }

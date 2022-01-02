@@ -24,7 +24,7 @@
 
             <ImageView
                 android:id="@+id/image_photo"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="240dp"
                 android:contentDescription="@string/photo"
                 android:scaleType="centerCrop"
@@ -35,15 +35,37 @@
 
             <TextView
                 android:id="@+id/text_author"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:layout_marginEnd="6dp"
+                android:fontFamily="sans-serif-medium"
                 android:padding="2dp"
                 android:text="@{item.author}"
                 android:textAlignment="textEnd"
-                android:textAppearance="?attr/textAppearanceHeadline6"
                 android:textColor="@android:color/black"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toTopOf="@id/text_image_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/image_photo"
                 tools:text="Alice" />
+
+            <TextView
+                android:id="@+id/text_image_size"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:fontFamily="sans-serif-light"
+                android:paddingVertical="4dp"
+                android:text="@{item.width + `x` + item.height}"
+                android:textAlignment="textEnd"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_author"
+                tools:text="1024 x 2044" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>

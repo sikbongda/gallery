@@ -42,6 +42,7 @@ android {
 }
 
 dependencies {
+    implementation project(path: ':database')
     implementation project(path: ':network')
 
     implementation 'androidx.multidex:multidex:2.0.1'

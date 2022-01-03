@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.wally.database.entity.Photo
 import com.wally.gallery.databinding.PhotoItemBinding
-import com.wally.network.response.Photo
 
 class PhotoPagingDataAdapter(
     val clickListener: (photo: Photo) -> Unit

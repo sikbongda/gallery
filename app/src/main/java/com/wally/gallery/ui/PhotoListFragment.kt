@@ -1,6 +1,7 @@
 package com.wally.gallery.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -56,6 +57,7 @@ class PhotoListFragment : Fragment() {
 
     private fun collectFlow() {
         lifecycleScope.launchWhenCreated {
+            Log.d("PhotoListFragment", "collectFlow: ")
             photoViewModel.photoFlow.collectLatest { pagedData ->
                 adapter.submitData(pagedData)
             }

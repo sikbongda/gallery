@@ -1,9 +1,11 @@
 package com.wally.gallery.ui
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import com.wally.database.entity.Photo
 import com.wally.gallery.domain.GetPhotosUseCase
-import com.wally.network.response.Photo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,5 +20,5 @@ class PhotoViewModel @Inject constructor(
         MutableStateFlow(PhotoUiState.Initial)
     val photoUiState: StateFlow<PhotoUiState> = _photoUiState
 
-    val photoFlow: Flow<PagingData<Photo>> = getPhotosUseCase()
+    val photoFlow: Flow<PagingData<Photo>> = getPhotosUseCase().cachedIn(viewModelScope)
 }

@@ -1,6 +1,6 @@
 package com.wally.gallery.ui
 
-import com.wally.network.response.Photo
+import com.wally.database.entity.Photo
 
 sealed class PhotoUiState {
     object Initial : PhotoUiState()

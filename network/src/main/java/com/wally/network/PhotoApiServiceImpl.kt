@@ -16,15 +16,15 @@ class PhotoApiServiceImpl(private val client: HttpClient) : PhotoApiService {
             }
         } catch (e: RedirectResponseException) {
             // 3xx - responses
-            Log.e("StockApiService", "RedirectResponseException")
+            Log.e("PhotoApiServiceImpl", "RedirectResponseException")
             emptyList()
         } catch (e: ClientRequestException) {
             // 4xx - responses
-            Log.e("StockApiService", "ClientRequestException")
+            Log.e("PhotoApiServiceImpl", "ClientRequestException")
             emptyList()
         } catch (e: ServerResponseException) {
             // 5xx - responses
-            Log.e("StockApiService", "ServerResponseException")
+            Log.e("PhotoApiServiceImpl", "ServerResponseException")
             emptyList()
         }
     }

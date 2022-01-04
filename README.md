@@ -1,5 +1,6 @@
 # gallery
 Gallery App 2022
+
 만든이: 전윤식
 
 아키텍처 MVVM

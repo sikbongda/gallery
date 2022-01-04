@@ -1,7 +1,6 @@
 package com.wally.gallery.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,10 +21,11 @@ class PhotoListFragment : Fragment() {
     private val photoViewModel: PhotoViewModel by viewModels()
     private val adapter: PhotoPagingDataAdapter by lazy {
         PhotoPagingDataAdapter(PhotoClickListener { photo ->
-            // click listener
+            // when item clicked
             val directions = PhotoListFragmentDirections.actionPhotoDetails(photo.id)
             findNavController().navigate(directions)
         }, BookmarkListener { id, bookmarked ->
+            // when book mark clicked
             photoViewModel.setBookmark(id, bookmarked)
         }).apply {
             addLoadStateListener { loadStates ->

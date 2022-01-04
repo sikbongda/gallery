@@ -6,6 +6,7 @@ import com.wally.database.dao.PhotoDao
 import com.wally.gallery.data.PhotoRepository
 import com.wally.gallery.data.PhotoRepositoryImpl
 import com.wally.gallery.domain.GetPhotosUseCase
+import com.wally.gallery.domain.SetBookmarkUseCase
 import com.wally.network.PhotoApiService
 import dagger.Binds
 import dagger.Module
@@ -20,7 +21,10 @@ import javax.inject.Singleton
 @InstallIn(ViewModelComponent::class)
 object UseCaseModule {
     @Provides
-    fun provide(repo: PhotoRepository) = GetPhotosUseCase(repo)
+    fun providePhoto(repo: PhotoRepository) = GetPhotosUseCase(repo)
+
+    @Provides
+    fun provideBookmark(repo: PhotoRepository) = SetBookmarkUseCase(repo)
 }
 
 @Module
@@ -38,8 +42,8 @@ object ApiModule {
     fun provide(): PhotoApiService = PhotoApiService.create()
 }
 
-@InstallIn(SingletonComponent::class)
 @Module
+@InstallIn(SingletonComponent::class)
 object DatabaseModule {
 
     @Provides

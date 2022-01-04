@@ -1,15 +1,23 @@
 package com.wally.network
 
 import android.util.Log
-import com.wally.network.response.Photo
+import com.wally.network.response.PhotoResponse
 import io.ktor.client.*
 import io.ktor.client.engine.android.*
 import io.ktor.client.features.*
 import io.ktor.client.features.json.*
 import io.ktor.client.features.logging.*
 
+const val BASE_URL = "https://picsum.photos"
+
+const val LIST_IMAGES_URL = "${BASE_URL}/v2/list"
+const val PAGE = "page"
+const val LIMIT = "limit"
+
+const val TIME_OUT = 15000L
+
 interface PhotoApiService {
-    suspend fun getListImages(page: Int, limit: Int): List<Photo>
+    suspend fun getListImages(page: Int, limit: Int): List<PhotoResponse>
 
     companion object {
         private const val TAG = "PhotoApiService"

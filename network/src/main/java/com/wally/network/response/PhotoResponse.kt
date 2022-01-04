@@ -1,6 +1,6 @@
 package com.wally.network.response
 
-data class Photo(
+data class PhotoResponse(
     val author: String,
     val download_url: String,
     val height: Int,

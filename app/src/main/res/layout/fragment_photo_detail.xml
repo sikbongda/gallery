@@ -6,7 +6,7 @@
     <data>
 
         <variable
-            name="id"
+            name="url"
             type="String" />
     </data>
 
@@ -21,7 +21,7 @@
             android:layout_height="300dp"
             android:contentDescription="@string/app_name"
             android:scaleType="centerCrop"
-            app:imageFromUrl="@{id}"
+            app:imageFromUrl="@{url}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

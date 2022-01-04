@@ -24,7 +24,7 @@
         android:label="PhotoDetailFragment"
         tools:layout="@layout/fragment_photo_detail">
         <argument
-            android:name="photoId"
+            android:name="photoUrl"
             app:argType="string" />
     </fragment>
 </navigation>

@@ -22,7 +22,7 @@ class PhotoListFragment : Fragment() {
     private val adapter: PhotoPagingDataAdapter by lazy {
         PhotoPagingDataAdapter(PhotoClickListener { photo ->
             // when item clicked
-            val directions = PhotoListFragmentDirections.actionPhotoDetails(photo.id)
+            val directions = PhotoListFragmentDirections.actionPhotoDetails(photo.download_url)
             findNavController().navigate(directions)
         }, BookmarkListener { id, bookmarked ->
             // when book mark clicked

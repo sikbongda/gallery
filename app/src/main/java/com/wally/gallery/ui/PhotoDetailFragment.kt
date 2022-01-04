@@ -19,7 +19,7 @@ class PhotoDetailFragment : Fragment() {
         binding = FragmentPhotoDetailBinding.inflate(layoutInflater, container, false).apply {
             lifecycleOwner = viewLifecycleOwner
         }
-        binding.id = args.photoId
+        binding.url = args.photoUrl
         return binding.root
     }
 }

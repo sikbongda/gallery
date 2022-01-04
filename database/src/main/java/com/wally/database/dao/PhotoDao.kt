@@ -17,4 +17,7 @@ interface PhotoDao {
 
     @Query("DELETE FROM photos")
     suspend fun clearAll()
+
+    @Query("UPDATE photos SET bookmarked = :bookmarked WHERE id = :photoId")
+    suspend fun updateBookmark(photoId: String, bookmarked: Boolean)
 }

@@ -9,22 +9,17 @@ import com.wally.database.entity.Photo
 import com.wally.gallery.databinding.PhotoItemBinding
 
 class PhotoPagingDataAdapter(
-    val clickListener: (photo: Photo) -> Unit
+    val clickListener: PhotoClickListener,
+    val bookmarkedListener: BookmarkListener,
 ) : PagingDataAdapter<Photo, PhotoPagingDataAdapter.PhotoViewHolder>(COMPARATOR) {
     inner class PhotoViewHolder(
         private val binding: PhotoItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        init {
-            itemView.setOnClickListener {
-                binding.item?.let {
-                    clickListener.invoke(it)
-                }
-            }
-        }
-
         fun bind(photo: Photo?) {
             with(binding) {
                 item = photo
+                photoClickListener = clickListener
+                bookmarkListener = bookmarkedListener
                 executePendingBindings()
             }
         }
@@ -50,4 +45,12 @@ class PhotoPagingDataAdapter(
         }
     }
 
+}
+
+class PhotoClickListener(val clickListener: (photo: Photo) -> Unit) {
+    fun onClick(photo: Photo) = clickListener(photo)
+}
+
+class BookmarkListener(val clickListener: (id: String, bookmarked: Boolean) -> Unit) {
+    fun onClick(id: String, bookmarked: Boolean) = clickListener(id, bookmarked)
 }

@@ -21,11 +21,13 @@ class PhotoListFragment : Fragment() {
     private lateinit var binding: FragmentPhotoListBinding
     private val photoViewModel: PhotoViewModel by viewModels()
     private val adapter: PhotoPagingDataAdapter by lazy {
-        PhotoPagingDataAdapter { photo ->
+        PhotoPagingDataAdapter(PhotoClickListener { photo ->
             // click listener
             val directions = PhotoListFragmentDirections.actionPhotoDetails(photo.id)
             findNavController().navigate(directions)
-        }.apply {
+        }, BookmarkListener { id, bookmarked ->
+            photoViewModel.setBookmark(id, bookmarked)
+        }).apply {
             addLoadStateListener { loadStates ->
                 binding.progressBar.isVisible = loadStates.refresh is LoadState.Loading
             }
@@ -57,7 +59,6 @@ class PhotoListFragment : Fragment() {
 
     private fun collectFlow() {
         lifecycleScope.launchWhenCreated {
-            Log.d("PhotoListFragment", "collectFlow: ")
             photoViewModel.photoFlow.collectLatest { pagedData ->
                 adapter.submitData(pagedData)
             }

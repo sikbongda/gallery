@@ -1,5 +1,6 @@
 package com.wally.gallery.data
 
+import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
@@ -19,8 +20,12 @@ class PhotoRepositoryImpl @Inject constructor(
         Pager(
             config = PagingConfig(pageSize = 10, enablePlaceholders = false),
             remoteMediator = PhotoRemoteMediator(db, photoApiService)
-            //pagingSourceFactory = { PhotoPagingSource(photoApiService) }
         ) {
             db.getPhotoDao().selectAllPhotos()
         }.flow
+
+    override suspend fun setBookmark(photoId: String, bookmarked: Boolean) {
+        Log.d("PhotoRepositoryImpl", "setBookmark: $bookmarked")
+        db.getPhotoDao().updateBookmark(photoId, !bookmarked)
+    }
 }

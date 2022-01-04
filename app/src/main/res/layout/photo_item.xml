@@ -8,6 +8,15 @@
         <variable
             name="item"
             type="com.wally.database.entity.Photo" />
+
+        <variable
+            name="photoClickListener"
+            type="com.wally.gallery.ui.PhotoClickListener" />
+
+        <variable
+            name="bookmarkListener"
+            type="com.wally.gallery.ui.BookmarkListener" />
+
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -20,7 +29,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> photoClickListener.onClick(item)}">
 
             <ImageView
                 android:id="@+id/image_photo"
@@ -66,6 +76,20 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text_author"
                 tools:text="1024 x 2044" />
+
+            <ImageView
+                android:id="@+id/iv_bookmarked"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:clickable="true"
+                android:contentDescription="@string/bookmark"
+                android:focusable="true"
+                android:onClick="@{() -> bookmarkListener.onClick(item.id, item.bookmarked)}"
+                app:bookmarked="@{item.bookmarked}"
+                app:layout_constraintBottom_toBottomOf="@+id/image_photo"
+                app:layout_constraintEnd_toEndOf="@+id/image_photo"
+                tools:src="@drawable/ic_baseline_star_24" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>

@@ -6,4 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface PhotoRepository {
     fun getPhotoResultStream(): Flow<PagingData<Photo>>
+    suspend fun setBookmark(photoId: String, bookmarked: Boolean)
 }

@@ -1,7 +1,7 @@
 # gallery
 Gallery App 2022
 
-만든이: 전윤식
+https://picsum.photos/
 
 아키텍처 MVVM
 

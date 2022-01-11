@@ -23,21 +23,6 @@ abstract class GalleryDatabase : RoomDatabase() {
     abstract fun remoteKeyDao(): RemoteKeyDao
 
     companion object {
-        @Volatile
-        private var INSTANCE: GalleryDatabase? = null
-
-        fun getInstance(context: Context): GalleryDatabase =
-            INSTANCE ?: synchronized(this) {
-                INSTANCE ?: buildDatabase(context).also { INSTANCE = it }
-            }
-
-        private fun buildDatabase(context: Context): GalleryDatabase =
-            Room.databaseBuilder(
-                context,
-                GalleryDatabase::class.java,
-                "gallery_database",
-            ).build()
-
         fun create(context: Context, useInMemory: Boolean): GalleryDatabase {
             val databaseBuilder = if (useInMemory) {
                 Room.inMemoryDatabaseBuilder(context, GalleryDatabase::class.java)

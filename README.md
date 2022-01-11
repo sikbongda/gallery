@@ -1,5 +1,5 @@
 # gallery
-Gallery App 2022
+Gallery App 2022 습작(習作)
 
 https://picsum.photos/
 

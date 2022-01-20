@@ -6,6 +6,7 @@ import io.ktor.client.*
 import io.ktor.client.engine.android.*
 import io.ktor.client.features.*
 import io.ktor.client.features.json.*
+import io.ktor.client.features.json.serializer.*
 import io.ktor.client.features.logging.*
 
 const val BASE_URL = "https://picsum.photos"
@@ -39,10 +40,7 @@ interface PhotoApiService {
                         socketTimeoutMillis = TIME_OUT
                     }
                     install(JsonFeature) {
-                        serializer = GsonSerializer {
-                            setPrettyPrinting()
-                            disableHtmlEscaping()
-                        }
+                        serializer = KotlinxSerializer()
                     }
                 }
             )

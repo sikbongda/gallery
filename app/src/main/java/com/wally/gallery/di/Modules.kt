@@ -52,5 +52,5 @@ object DatabaseModule {
     @Provides
     @Singleton
     fun provideDatabase(@ApplicationContext appContext: Context): GalleryDatabase =
-        GalleryDatabase.create(context = appContext, useInMemory = true)
+        GalleryDatabase.create(context = appContext)
 }

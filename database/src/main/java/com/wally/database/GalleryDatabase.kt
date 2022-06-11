@@ -23,18 +23,12 @@ abstract class GalleryDatabase : RoomDatabase() {
     abstract fun remoteKeyDao(): RemoteKeyDao
 
     companion object {
-        fun create(context: Context, useInMemory: Boolean): GalleryDatabase {
-            val databaseBuilder = if (useInMemory) {
-                Room.inMemoryDatabaseBuilder(context, GalleryDatabase::class.java)
-            } else {
-                Room.databaseBuilder(context, GalleryDatabase::class.java, "gallery.db")
-            }
-            return databaseBuilder
+        fun create(context: Context): GalleryDatabase {
+            return Room.databaseBuilder(context, GalleryDatabase::class.java, "gallery.db")
                 .fallbackToDestructiveMigration()
                 .build()
         }
     }
-
 }
 
 suspend fun <R> GalleryDatabase.withTransaction(block: suspend () -> R): R {

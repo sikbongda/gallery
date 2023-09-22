@@ -17,7 +17,9 @@ import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
 class PhotoListFragment : Fragment() {
-    private lateinit var binding: FragmentPhotoListBinding
+    private var _binding: FragmentPhotoListBinding? = null
+    private val binding get() = _binding!!
+
     private val photoViewModel: PhotoViewModel by viewModels()
     private val adapter: PhotoPagingDataAdapter by lazy {
         PhotoPagingDataAdapter(PhotoClickListener { photo ->
@@ -38,7 +40,7 @@ class PhotoListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentPhotoListBinding.inflate(inflater, container, false).apply {
+        _binding = FragmentPhotoListBinding.inflate(inflater, container, false).apply {
             lifecycleOwner = viewLifecycleOwner
         }
         return binding.root
@@ -49,6 +51,11 @@ class PhotoListFragment : Fragment() {
 
         initRecyclerView()
         collectFlow()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun initRecyclerView() {
